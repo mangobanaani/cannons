@@ -26,8 +26,24 @@ Open http://localhost:3000 in a browser.
 
 ## Running Tests
 
+Unit tests:
+
 ```
 node --test tests/*.test.js
+```
+
+E2E tests (requires Chromium):
+
+```
+npx playwright install chromium
+npx playwright test
+```
+
+Or via Make:
+
+```
+make test
+make e2e
 ```
 
 ## Tech

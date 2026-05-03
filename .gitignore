@@ -5,3 +5,5 @@ dist/
 *.log
 .claude/
 docs/
+test-results/
+playwright-report/

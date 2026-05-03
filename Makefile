@@ -1,10 +1,13 @@
-.PHONY: serve test build run stop clean
+.PHONY: serve test e2e build run stop clean
 
 serve:
 	npx serve . -l 3000
 
 test:
 	node --test tests/*.test.js
+
+e2e:
+	npx playwright test
 
 build:
 	docker build -t cannons .
