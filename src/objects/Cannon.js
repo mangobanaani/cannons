@@ -53,7 +53,6 @@ export default class Cannon {
 
     draw() {
         this.graphics.clear();
-        const dir = this.isPlayer ? 1 : -1;
 
         // Barrel
         const tip = this.getBarrelTip();

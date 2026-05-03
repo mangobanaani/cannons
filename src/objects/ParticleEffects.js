@@ -2,11 +2,13 @@ export default class ParticleEffects {
     constructor(scene) {
         this.scene = scene;
 
-        const gfx = scene.make.graphics({ add: false });
-        gfx.fillStyle(0xffffff);
-        gfx.fillCircle(4, 4, 4);
-        gfx.generateTexture('particle', 8, 8);
-        gfx.destroy();
+        if (!scene.textures.exists('particle')) {
+            const gfx = scene.make.graphics({ add: false });
+            gfx.fillStyle(0xffffff);
+            gfx.fillCircle(4, 4, 4);
+            gfx.generateTexture('particle', 8, 8);
+            gfx.destroy();
+        }
 
         this.dirtEmitter = scene.add.particles(0, 0, 'particle', {
             speed: { min: 50, max: 200 },

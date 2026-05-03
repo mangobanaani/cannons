@@ -59,7 +59,7 @@ export default class GameScene extends Phaser.Scene {
                 return;
             }
 
-            if (pos.x < -50 || pos.x > Config.GAME_WIDTH + 50 || pos.y > Config.GAME_HEIGHT + 50) {
+            if (pos.x < -50 || pos.x > Config.GAME_WIDTH + 50 || pos.y > Config.GAME_HEIGHT + 50 || pos.y < -1000) {
                 this.onProjectileMiss();
                 return;
             }
