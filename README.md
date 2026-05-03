@@ -2,6 +2,10 @@
 
 A 2D artillery game where you battle an AI opponent by lobbing projectiles across destructible terrain.
 
+![Menu](screenshot-menu.png)
+![Gameplay](screenshot-gameplay.png)
+![Victory](screenshot-victory.png)
+
 ## How to Play
 
 Adjust your cannon's angle and power, then fire to hit the enemy cannon. The terrain deforms on impact, creating craters. First cannon to reach 0 HP loses.
