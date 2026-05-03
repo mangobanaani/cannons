@@ -1,58 +1,68 @@
 # Cannons
 
-A 2D artillery game where you battle an AI opponent by lobbing projectiles across destructible terrain.
+Real-time 2D artillery game. Fire projectiles across destructible terrain to destroy the enemy cannon before it destroys yours. Both sides fire independently -- no waiting for turns.
 
-![Menu](screenshot-menu.png)
 ![Gameplay](screenshot-gameplay.png)
-![Victory](screenshot-victory.png)
 
-## How to Play
+## Controls
 
-Adjust your cannon's angle and power, then fire to hit the enemy cannon. The terrain deforms on impact, creating craters. First cannon to reach 0 HP loses.
+| Key | Action |
+|-----|--------|
+| UP / DOWN | Adjust barrel angle |
+| LEFT / RIGHT | Adjust power |
+| SPACE | Fire (2s cooldown) |
+| 1 / 2 / 3 | Switch weapon |
 
-### Controls
+## Weapons
 
-- **UP/DOWN** - Adjust barrel angle
-- **LEFT/RIGHT** - Adjust power
-- **SPACE** - Fire
+| # | Name | Blast | Damage | Notes |
+|---|------|-------|--------|-------|
+| 1 | Standard | 40px | 35 | Default, balanced |
+| 2 | Big Blast | 70px | 20 | Larger crater, slower projectile |
+| 3 | Cluster Bomb | 30px | 15 | Splits into 3 sub-projectiles |
 
-## Running
+## Gameplay
+
+- Wind changes every 5 seconds, shown in HUD
+- Terrain deforms on impact (sand = deeper craters, rock = resistant)
+- Barrel hit reduces max power, wheel hit locks angle
+- Power-ups drop every 15-20s: health, damage boost, shield
+- Water at terrain floor is an instant kill
+- Best of 5 rounds, terrain type and lighting change each round
+- 3 AI difficulties: Easy, Medium, Hard (learns from misses)
+
+## Quick Start
 
 ```
-npx serve . -l 3000
+npm install
+npm run dev
 ```
 
-Open http://localhost:3000 in a browser.
-
-## Running Tests
-
-Unit tests:
+## Testing
 
 ```
-node --test tests/*.test.js
-```
-
-E2E tests (requires Chromium):
-
-```
+npm run test              # unit tests (vitest)
 npx playwright install chromium
-npx playwright test
+npm run e2e               # e2e tests (playwright)
 ```
 
-Or via Make:
+## Build and Deploy
 
 ```
-make test
-make e2e
+npm run build             # vite production build
+make run                  # build + preview locally
+make docker-build         # docker image
+make docker-run           # run in docker on port 8080
+make help                 # list all targets
 ```
 
-## Tech
+## Tech Stack
 
-- Phaser 3 with Matter.js physics
-- Vanilla JS ES modules, no build step
-- Procedural terrain via midpoint displacement
-- Distance-based damage with cosine-falloff craters
+- React 18, Vite, Phaser 3, Matter.js
+- Vitest, Playwright
+- Procedural terrain (midpoint displacement)
+- Procedural audio (Web Audio API oscillators + noise)
 
 ## License
 
-GPL-3.0 - see [LICENSE](LICENSE)
+GPL-3.0
