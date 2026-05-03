@@ -3,6 +3,7 @@ import Cannon from '../objects/Cannon.js';
 import Projectile from '../objects/Projectile.js';
 import ParticleEffects from '../objects/ParticleEffects.js';
 import { calculateDamage } from '../utils/combat.js';
+import { calculateAIShot } from '../utils/ai.js';
 import * as Config from '../config.js';
 
 export default class GameScene extends Phaser.Scene {
@@ -146,6 +147,29 @@ export default class GameScene extends Phaser.Scene {
         this.isPlayerTurn = !this.isPlayerTurn;
         this.canFire = true;
         this.updateHUD();
+
+        if (!this.isPlayerTurn) {
+            this.canFire = false;
+            this.time.delayedCall(800, () => {
+                this.aiTurn();
+            });
+        }
+    }
+
+    aiTurn() {
+        const shot = calculateAIShot(
+            this.aiCannon.x, this.aiCannon.y,
+            this.playerCannon.x, this.playerCannon.y,
+            Config.GRAVITY, Config.MAX_POWER
+        );
+
+        this.aiCannon.angle = shot.angle;
+        this.aiCannon.power = shot.power;
+        this.aiCannon.draw();
+
+        this.time.delayedCall(400, () => {
+            this.fireProjectile(this.aiCannon);
+        });
     }
 
     updateHUD() {
